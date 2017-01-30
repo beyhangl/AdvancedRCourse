@@ -20,6 +20,25 @@ Factorial_reduce<-function(number)
 #Version 3
 Factorial_func<-function(number) {if(number<=0) 1 else number*Factorial_func(number-1) }
 
+#Version 4
+
+
+createMemFactorial <- function() {
+  res <- 1
+  memFactorial <- function(n) {
+    if (n == 1) return(1)
+
+    if (length(res) < n) res <<- `length<-`(res, n)
+
+    if (!is.na(res[n])) return(res[n])
+
+    res[n] <<- n * factorial(n-1)
+    res[n]
+  }
+  memFactorial
+}
+memFactorial <- createMemFactorial()
+
 
 ##microbenchmark
 library(microbenchmark)
